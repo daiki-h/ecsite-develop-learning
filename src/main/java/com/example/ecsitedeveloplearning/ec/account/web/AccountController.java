@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.ecsitedeveloplearning.ec.account.model.Accounts;
+import com.example.ecsitedeveloplearning.ec.account.model.Account;
 import com.example.ecsitedeveloplearning.ec.account.service.AccountService;
 
 @Controller
@@ -27,7 +27,7 @@ public class AccountController {
 	// Top Page
 	@GetMapping("/findAll")
 	public String getAccounts() {
-		List<Accounts> findAll = accountService.findAll();
+		List<Account> findAll = accountService.findAll();
 		System.out.println("findAll :" + findAll);
 		System.out.println("viewLogin");
 		return "account/login";

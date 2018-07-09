@@ -1,10 +1,25 @@
 package com.example.ecsitedeveloplearning.ec.shop.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import lombok.Data;
 
 @Data
+@Entity
+@Table(name = "categories")
 public class Category {
 	
-	// Databaseの Categoriesテーブルと連携するため Entity設定必要
-
+	@Id
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	
+	@Column(name = "name")
+	private String name;
+	
 }
