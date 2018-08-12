@@ -7,10 +7,18 @@
 	<script th:src="@{/webjars/jquery/3.1.1/jquery.min.js}"></script>    
 	<script th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
 	<link href="/css/common.css" th:href="@{/css/common.css}" rel="stylesheet"></link>
+	<link href="/css/basic.css" th:href="@{/css/basic.css}" rel="stylesheet"></link>
 </head>
 <body>
+
+
 	<h1 align="center">Shop</h1>
 	<div align="center">
+		<div align="right">
+			<form action="#" th:action="@{/shop/product}" method="get">
+				<button type="submit" class="btn btn-primary btn-lg" style="margin-bottom:10px;">追加</button>
+			</form>
+		</div>
 		<div style="width:60%;">
 			<table id="userTable" class="table table-striped table-bordered table-hover" >
 				<colgroup>
@@ -47,10 +55,11 @@
 			</table>
 		</div>
 		<ul class="b-mod-item-list-box">
-			<li class="b-item" th:each="product : ${products}" >
+			<li th:id="${product.id}" class="b-item" th:each="product : ${products}" >
 				<div class="b-img">
 			      <div class="b-thumb-128px">
-			        <a href="#"><img alt="Ads19 7680 1" th:src="${product.imagePath}"></a>
+			        <!-- <a href="#"><img alt="Ads19 7680 1" th:src="${product.imagePath}"></a> -->
+			        <a href="#"><img th:src="@{../images/} + ${product.imagePath}"></a>
 			      </div>
 			    </div>
 				<div class="b-text">
@@ -66,5 +75,17 @@
 			</li>
 		</ul>
 	</div>
+
+
+<!-- JavaScript -->
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(document).on('click', ".b-item", function() {
+			var val = $(this).attr("id");
+			console.log("val : " + val);
+			window.location.href='product/' + val;
+		});
+	});
+</script>	
 </body>
 </html>
