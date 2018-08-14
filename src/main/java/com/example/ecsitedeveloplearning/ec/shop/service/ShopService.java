@@ -20,6 +20,7 @@ import com.example.ecsitedeveloplearning.ec.shop.repository.ProductRepository;
 @Service
 public class ShopService {
 
+	// イメージPath
 	@Value("${upload.image.path}")
 	private String uploadImagePath;
 
