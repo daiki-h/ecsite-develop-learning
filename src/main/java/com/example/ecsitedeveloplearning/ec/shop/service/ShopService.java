@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,20 +29,17 @@ public class ShopService {
 	@Autowired
 	private CategoryRepository categoryRepository;
 
+	// 商品リスト取得
 	public List<Product> findAll() {
 		return productRepository.findAll();
 	}
 
+	// カテゴリ取得
 	public List<Category> findCategories() {
 		return categoryRepository.findAll();
 	}
 
-	/**
-	 * 商品登録
-	 * 
-	 * @param product
-	 * @param image
-	 */
+	// 商品登録
 	public void register(Product product, MultipartFile image) {
 		String imagePath = saveImageFile(image);
 		if (imagePath.length() > 0) {
@@ -52,11 +48,13 @@ public class ShopService {
 		}
 	}
 	
+	// 商品取得
 	public Product findProductById(long productId) {
 		Product product = productRepository.findById(productId).get();
 		return product;
 	}
 
+	//　イメージをファイルに保存する
 	private String saveImageFile(MultipartFile image) {
 		
 		String imagePath = "";
@@ -78,7 +76,7 @@ public class ShopService {
 		return imagePath;
 	}
 
-	// Create Image File Name
+	// ファイル名生成
 	private String genSaveFileName(String imageName) {
 		Calendar cl = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
@@ -91,7 +89,7 @@ public class ShopService {
 		return fileName;
 	}
 
-	// Write Image File
+	// ファイル保存
 	private boolean writeFile(MultipartFile multipartFile, String saveFileName) throws IOException {
 		boolean result = false;
 		byte[] data = multipartFile.getBytes();

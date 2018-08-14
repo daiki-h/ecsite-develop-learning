@@ -85,17 +85,6 @@ public class ShopController {
 		Product product = shopService.findProductById(productId);
 		mv.addObject("product", product);
 		
-		/*Resource resource = shopService.loadAsResource(product.getImagePath());
-        String fileName = uploadedFile.getFileName();
-        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + new String(fileName.getBytes("UTF-8"), "ISO-8859-1") + "\"");
-
-        if (MediaUtils.containsImageMediaType(uploadedFile.getContentType())) {
-            headers.setContentType(MediaType.valueOf(uploadedFile.getContentType()));
-        } else {
-            headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-        }
-        
-        return ResponseEntity.ok().headers(headers).body(resource);*/
 		return mv;
 	}
 	
