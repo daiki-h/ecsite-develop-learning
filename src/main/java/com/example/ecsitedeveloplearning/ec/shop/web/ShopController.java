@@ -3,10 +3,10 @@ package com.example.ecsitedeveloplearning.ec.shop.web;
 import java.io.File;
 import java.util.List;
 
-import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,8 +23,6 @@ import com.example.ecsitedeveloplearning.ec.shop.service.ShopService;
 @RequestMapping(path="/shop")
 public class ShopController {
 	
-	private static Logger logger = Logger.getLogger(ShopController.class);
-	
 	@Autowired
 	private ShopService shopService;
 	
@@ -33,9 +31,22 @@ public class ShopController {
 	
 	// TOP 画面
 	@GetMapping("/top")
-	public ModelAndView viewIndex() {
+	public ModelAndView viewTop() {
 		ModelAndView mv = new ModelAndView("shop/top");
-		List<Product> products = shopService.findAll();
+		List<Product> products = shopService.findAllByCategory(1);
+		List<Category> categories = shopService.findCategories();
+		mv.addObject("categories", categories);
+		mv.addObject("products", products);
+		return mv;
+	}
+	
+	// TOP 画面
+	@GetMapping("/top/{categoryId}")
+	public ModelAndView viewTopByCategory(@PathVariable int categoryId) {
+		ModelAndView mv = new ModelAndView("shop/top");
+		List<Product> products = shopService.findAllByCategory(categoryId);
+		List<Category> categories = shopService.findCategories();
+		mv.addObject("categories", categories);
 		mv.addObject("products", products);
 		return mv;
 	}
@@ -84,7 +95,6 @@ public class ShopController {
 		ModelAndView mv = new ModelAndView("shop/viewProduct");
 		Product product = shopService.findProductById(productId);
 		mv.addObject("product", product);
-		
 		return mv;
 	}
 	
@@ -93,6 +103,8 @@ public class ShopController {
 	public ModelAndView viewUpdateProduct(@PathVariable long productId) {
 		ModelAndView mv = new ModelAndView("shop/updateProduct");
 		Product product = shopService.findProductById(productId);
+		List<Category> categories = shopService.findCategories();
+		mv.addObject("categories", categories);
 		mv.addObject("product", product);
 		return mv;
 	}
@@ -121,6 +133,7 @@ public class ShopController {
 	// 商品削除
 	@PostMapping("/delete/product/{productId}")
 	public String deleteProduct(@PathVariable long productId) {
+		System.out.println("productId : " + productId);
 		shopService.delete(productId);
 		return "redirect:/shop/top";
 	}

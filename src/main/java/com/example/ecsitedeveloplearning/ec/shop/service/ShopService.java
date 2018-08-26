@@ -104,7 +104,7 @@ public class ShopService {
 	public void update(Product product, MultipartFile image) {
 		Product originalProduct = productRepository.findById(product.getId()).get();
 		
-		File originalImage = new File(originalProduct.getImagePath());
+		File originalImage = new File(uploadImagePath + "/" + originalProduct.getImagePath());
 		originalImage.delete();
 		
 		String imagePath = saveImageFile(image);
@@ -116,7 +116,15 @@ public class ShopService {
 
 	// 商品削除
 	public void delete(long productId) {
+		Product originalProduct = productRepository.findById(productId).get();
+		File originalImage = new File(uploadImagePath + "/" + originalProduct.getImagePath());
+		originalImage.delete();
 		productRepository.deleteById(productId);
+	}
+
+	public List<Product> findAllByCategory(int id) {
+		List<Product> products = productRepository.findByCategoryId(new Category(id, null));
+		return products;
 	}
 	
 }

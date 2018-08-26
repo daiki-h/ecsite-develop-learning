@@ -19,7 +19,7 @@ public class Category {
 	public Category() {
 		super();
 	}
-
+	
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
