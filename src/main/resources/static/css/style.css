@@ -36,8 +36,8 @@ h3 { font-size:15px; line-height:18px; color:#bcbcbc; text-transform: uppercase;
 
 .shell { width:980px; margin:0 auto; }
 
-#top { height:479px; background:#000; }
-#product-top { height:100px; background:#000; }
+#top { height:479px; background:url(images/bgimg.jpg) repeat-x 0 0;}
+#product-top { height:100px; background:url(images/bgimg.jpg) repeat-x 0 0;}
 #header { height:61px; }
 
 #slider { width:980px; height:418px; position:relative; overflow:hidden; }
