@@ -11,9 +11,6 @@ import javax.persistence.Table;
 
 import com.example.ecsitedeveloplearning.ec.account.model.Account;
 
-import lombok.Data;
-
-@Data
 @Entity
 @Table(name = "carts")
 public class Cart {
@@ -31,4 +28,13 @@ public class Cart {
 	@JoinColumn(name = "product_id")
 	private Product productId;
 
+	public Cart() {
+
+	}
+
+	public Cart(Long id, Account accountId, Product productId) {
+		this.id = id;
+		this.accountId = accountId;
+		this.productId = productId;
+	}
 }

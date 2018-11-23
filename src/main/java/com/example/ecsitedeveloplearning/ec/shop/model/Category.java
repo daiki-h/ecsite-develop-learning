@@ -7,19 +7,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-
-@Data
-@AllArgsConstructor
 @Entity
 @Table(name = "categories")
 public class Category {
 	
-	public Category() {
-		super();
-	}
-	
+
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,5 +19,13 @@ public class Category {
 	
 	@Column(name = "name")
 	private String name;
-	
+
+	public Category() {
+		super();
+	}
+
+	public Category(Integer id, String name) {
+		this.id = id;
+		this.name = name;
+	}
 }
